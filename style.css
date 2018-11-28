@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu+Mono');
+
+* {
+  font-family: "Ubuntu Mono", sans-serif;
+}
+
+html, body, h1 {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background-color: black;
+}
+
+.container {
+  display: flex;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+#clock {
+  color: #fff;
+  font-size: 5em;
+}
+
+@media (min-width: 64em) {
+  #clock {
+    font-size: 10em;
+  }
+}
+
+/* Landscape */
+@media screen and (orientation:landscape) {
+  #clock {
+    font-size: 3em;
+  }
+  .container {
+    align-items: flex-end;
+  }
+}
