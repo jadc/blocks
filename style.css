@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
+
+* {
+  font-family: "Roboto Mono", sans-serif;
+}
+
+html, body, h1 {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background-color: black;
+}
+
+.container {
+  display: flex;
+  position: fixed;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  justify-content: center;
+  align-items: center;
+}
+
+#clock {
+  color: #fff;
+  font-size: 10vw;
+}
+
+/* Landscape */
+@media screen and (orientation:landscape) {
+  .container {
+    align-items: flex-end;
+  }
+
+  #clock {
+    font-size: 2em;
+  }
+}
