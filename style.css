@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
+
+* {
+  font-family: "Roboto Mono", sans-serif;
+}
+
+html, body, h1 {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background-color: black;
+}
+
+#container {
+  display: flex;
+  position: fixed;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+#clock {
+  color: #fff;
+  font-size: 1.5em;
+  transform: translateY(1.5em);
+}
+
+.animation {
+  animation: slidein 3s cubic-bezier(0.645, 0.045, 0.355, 1) 1s 2 alternate;
+}
+
+@keyframes slidein {
+  0% { transform: translateY(1.5em); }
+  25% { transform: translateY(0em); }
+  50% { transform: translateY(0em); }
+  75% { transform: translateY(0em); }
+  100% { transform: translateY(0em); }
+}
