@@ -2,9 +2,10 @@
   "name": "blocks",
   "short_name": "blocks",
   "lang": "en-CA",
-  "start_url": "/",
+  "start_url": "/blocks/",
   "display": "fullscreen",
   "theme_color": "#000000",
+  "background_color": "#000000",
   "icons": [
     {
       "src": "icon.png",
