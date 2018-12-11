@@ -2,7 +2,7 @@
   "name": "blocks",
   "short_name": "blocks",
   "lang": "en-CA",
-  "start_url": "/",
+  "start_url": "/blocks/",
   "display": "fullscreen",
   "orientation":  "landscape",
   "theme_color": "#000000",
