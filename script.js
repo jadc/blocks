@@ -1,3 +1,5 @@
+let now = moment();
+
 const timeFormat = "h:mm:ss a";
 const dateFormat = "MM-DD";
 
@@ -9,6 +11,7 @@ let target;
 (() => {
   blockHandler();
   setClock();
+  addAnimation();
 })();
 
 function setClock(){
@@ -26,6 +29,8 @@ function setClock(){
 }
 
 function updateClock(){
+  // SET TIME
+  now = moment();
 
   if(visible){
     // Setting time
@@ -36,32 +41,31 @@ function updateClock(){
   }
 
   // Loop on interval
-  setTimeout(updateClock, 1000);
+  setTimeout(updateClock, 1000); 
 }
 
 function addAnimation(e){
-  e.preventDefault();
+  if(e != undefined) e.preventDefault();
 
   if(!visible){
+    blockHandler();
     visible = true;
     clock.className += " animation";
   }
-
-  return false;
 }
 
 function isCCD() {
-  let today = moment().format(dateFormat);
-  let ccdDay = moment().endOf("month").day("Thursday").format(dateFormat);
+  let today = now.format(dateFormat);
+  let ccdDay = now.endOf("month").day("Thursday").format(dateFormat);
   return (today == ccdDay) ? true : false;
 }
 
 function isMonday() {
-  return (moment().isoWeekday() == 1) ? true : false;
+  return (now.isoWeekday() == 1) ? true : false;
 }
 
 function isWeekend(){
-  return (moment().isoWeekday() == 6 || moment().isoWeekday() == 7) ? true : false;
+  return (now.isoWeekday() == 6 || now.isoWeekday() == 7) ? true : false;
 }
 
 // stackoverflow
@@ -71,46 +75,17 @@ function pad(string) {
 }
 
 function timeUntil(date){
-  const timeLeft = date.unix() - moment().unix();
-  const duration = moment.duration(timeLeft * 1000, 'milliseconds');
+  let dur = moment.utc(date.diff(now));
+  let format = "ss";
 
-  let h = pad(moment.duration(duration).hours());
-  let m = pad(moment.duration(duration).minutes());
-  let s = pad(moment.duration(duration).seconds());
+  if(dur.minute() > 0) format = "mm:ss";
+  if(dur.hour() > 0) format = "h:mm:ss";
 
-  console.log(`${h}:${m}:${s} => ${date.format(timeFormat)}`);
-  return `${h}:${m}:${s}`;
+  return dur.format(format);
 }
 
-/*
-
-  Monday
-  --
-  Block 1:    9:00 - 10:05
-  MEL Time:   10:09 - 11:15
-  Block 2:    11:19 - 12:28
-  Lunch:      12:28 - 1:13
-  Block 3:    1:13 - 2:18
-  Block 4:    2:25 - 3:30
-
-  Not Monday
-  --
-  Block 1:    9:00 - 10:22
-  Block 2:    10:29 - 11:56
-  Lunch:      11:56 - 12:39
-  Block 3:    12:39 - 2:01
-  Block 4:    2:08 - 3:30
-
-  CCD
-  --
-  Block 1:    9:00 - 9:53
-  Block 2:    10:00 - 10:53
-  Block 3:    11:01 - 11:53
-  Block 4:    12:01 - 12:53
-*/
-
 function between(before, after){
-  return moment().isBetween(moment(before, timeFormat), moment(after, timeFormat))
+  return now.isBetween(moment(before, timeFormat), moment(after, timeFormat))
 }
 
 function blockHandler(){
