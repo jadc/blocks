@@ -5,6 +5,7 @@
 }
 
 html, body, h1 {
+  touch-action: manipulation;
   padding: 0;
   margin: 0;
 }
@@ -30,8 +31,15 @@ body {
   transform: translateY(1.5em);
 }
 
+#version {
+  display: block;
+  color: #333;
+  text-align: center;
+  font-size: 1em;
+}
+
 .animation {
-  animation: slidein 3s cubic-bezier(0.645, 0.045, 0.355, 1) 1s 2 alternate;
+  animation: slidein 3s cubic-bezier(0.645, 0.045, 0.355, 1) 0s 2 alternate;
 }
 
 @keyframes slidein {
