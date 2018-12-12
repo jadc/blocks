@@ -1,9 +1,7 @@
-const version = "3.0.0";
-
+const version = "3.1.0";
 let now = moment();
 
 const timeFormat = "h:mm:ss a";
-
 const clock = document.getElementById("clock");
 let active = true;
 
@@ -13,9 +11,6 @@ let active = true;
 
   // Version display
   document.getElementById("version").innerHTML = "Version: " + version;
-  setTimeout(() => {
-    document.getElementById("version").style.display = "none";
-  }, 4000);
 })();
 
 // Animation handler
@@ -26,6 +21,7 @@ function onInteract(){
   clock.className = "animation";
 
   if(isCCD()) clock.style.color = "#ffff77";
+  document.getElementById("version").style.display = "none";
 
   clock.addEventListener("animationend", () => {
 
@@ -100,5 +96,5 @@ function timeUntilNextBlock(){
   }
 
   // Fallback
-  return "After school";
+  return "School starts in " + timeUntil(moment("3:30 pm", timeFormat).add(17.5, "hours"));
 }
