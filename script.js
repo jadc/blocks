@@ -1,8 +1,9 @@
-const version = "3.1.0";
+const version = "4.0.0";
 let now = moment();
 
 const timeFormat = "h:mm:ss a";
 const clock = document.getElementById("clock");
+const clockinv = document.getElementById("clockinv");
 let active = true;
 
 (() => {
@@ -19,14 +20,16 @@ function onInteract(){
   active = true;
   updateClock();
   clock.className = "animation";
+  clockinv.className = "animation";
 
-  if(isCCD()) clock.style.color = "#ffff77";
+  if(isCCD()) document.body.style.color = "#ffff77";
   document.getElementById("version").style.display = "none";
 
   clock.addEventListener("animationend", () => {
 
     active = false;
     clock.className = "";
+    clockinv.className = "";
     updateClock();
 
   }, false);
@@ -37,7 +40,9 @@ function updateClock(){
   now = moment();
 
   clock.innerHTML = timeUntilNextBlock();
-  if(active) setTimeout(updateClock, 100);
+  clockinv.innerHTML = timeUntilNextBlock();
+
+  if(active) setTimeout(updateClock, 0);
 }
 
 // Date checkers
@@ -58,7 +63,7 @@ function isWeekend(){
 // Time Checkers
 function timeUntil(date){
   let dur = moment.utc(date.diff(now));
-  let format = "s";
+  let format = "s.SSS";
 
   if(dur.minute() > 0) format = "m:ss";
   if(dur.hour() > 0) format = "h:mm:ss";
@@ -73,7 +78,7 @@ function between(before, after){
 // Block checkers
 function timeUntilNextBlock(){
 
-  if(isWeekend()) return "No school today";
+  if(isWeekend()) return "Break";
 
   if(isMonday()){
     if( between("9:00 am", "10:05 am")  )   return timeUntil(moment("10:05 am", timeFormat));
@@ -96,5 +101,5 @@ function timeUntilNextBlock(){
   }
 
   // Fallback
-  return "School starts in " + timeUntil(moment("3:30 pm", timeFormat).add(17.5, "hours"));
+  return timeUntil(moment("3:30 pm", timeFormat).add(17.5, "hours"));
 }
